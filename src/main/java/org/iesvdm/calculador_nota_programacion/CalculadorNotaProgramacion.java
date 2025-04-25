@@ -4,19 +4,20 @@ import java.util.Scanner;
 
 public class CalculadorNotaProgramacion {
 	public static void main() throws Exception {
+		
+		Scanner sc = new Scanner(System.in);
 
-		double nota1 = pedirNota();
-		double nota2 = pedirNota();
+		double nota1 = pedirNota(sc);
+		double nota2 = pedirNota(sc);
 
 		double media = media(nota1, nota2);
 
-		double notaFinal = notaFinal(media);
+		double notaFinal = notaFinal(media,sc);
 		System.out.println(notaFinal);
 
 	}
 
-	public static double pedirNota() throws Exception {
-		Scanner sc = new Scanner(System.in);
+	public static double pedirNota(Scanner sc) throws Exception {
 		System.out.println("Introduzca nota");
 		String notaSrt = sc.next();
 		double nota = Double.parseDouble(notaSrt);
@@ -34,8 +35,7 @@ public class CalculadorNotaProgramacion {
 
 	}
 
-	public static double notaFinal(double media) throws Exception {
-		Scanner sc = new Scanner(System.in);
+	public static double notaFinal(double media, Scanner sc) throws Exception {
 		double notaFinal = 0.0;
 
 		if (media < 5) {

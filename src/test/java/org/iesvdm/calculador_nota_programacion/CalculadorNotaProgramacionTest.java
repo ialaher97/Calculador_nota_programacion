@@ -3,6 +3,7 @@ package org.iesvdm.calculador_nota_programacion;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,52 +25,52 @@ public class CalculadorNotaProgramacionTest {
 	}
 
 	@Test
-	public void pedirNota() throws Exception {
+	public void pedirNota(Scanner sc) throws Exception {
 		provideInput("6.5");
 
-		double nota = CalculadorNotaProgramacion.pedirNota();
+		double nota = CalculadorNotaProgramacion.pedirNota(sc);
 
 		Assert.assertEquals(6.5, nota, 0.01);
 	}
 
 	@Test(expected = Exception.class)
-	public void pedirNotaFueraRango() throws Exception {
+	public void pedirNotaFueraRango(Scanner sc) throws Exception {
 		provideInput("11");
 
-		double nota = CalculadorNotaProgramacion.pedirNota();
+		double nota = CalculadorNotaProgramacion.pedirNota(sc);
 
 		Assert.assertEquals(6.5, nota, 0.01);
 	}
 
 	@Test
-	public void pedirNotaFueraRangoTryCatch() throws Exception {
+	public void pedirNotaFueraRangoTryCatch(Scanner sc) throws Exception {
 		provideInput("11");
 
 		try {
-			double nota = CalculadorNotaProgramacion.pedirNota();
+			double nota = CalculadorNotaProgramacion.pedirNota(sc);
 		} catch (Exception e) {
 			Assert.assertEquals("Nota no válida", e.getMessage());
 		}
 	}
 
 	@Test
-	public void pedirNotaFueraRangoTryCatch1() throws Exception {
+	public void pedirNotaFueraRangoTryCatch1(Scanner sc) throws Exception {
 		provideInput("abc");
 
 		try {
-			double nota = CalculadorNotaProgramacion.pedirNota();
+			double nota = CalculadorNotaProgramacion.pedirNota(sc);
 		} catch (NumberFormatException e) {
 			Assert.assertEquals("For input string: \"abc\"", e.getMessage());
 		}
 	}
 
 	@Test
-	public void mediaTest() throws Exception {
+	public void mediaTest(Scanner sc) throws Exception {
 
 		provideInput("6");
-		double nota1 = CalculadorNotaProgramacion.pedirNota();
+		double nota1 = CalculadorNotaProgramacion.pedirNota(sc);
 		provideInput("4");
-		double nota2 = CalculadorNotaProgramacion.pedirNota();
+		double nota2 = CalculadorNotaProgramacion.pedirNota(sc);
 
 		Assert.assertEquals(6.0, nota1, 0.01);
 		Assert.assertEquals(4.0, nota2, 0.01);
@@ -81,12 +82,12 @@ public class CalculadorNotaProgramacionTest {
 	}
 
 	@Test
-	public void aptoTest() throws Exception {
+	public void aptoTest(Scanner sc) throws Exception {
 
 		provideInput("6");
-		double nota1 = CalculadorNotaProgramacion.pedirNota();
+		double nota1 = CalculadorNotaProgramacion.pedirNota(sc);
 		provideInput("3");
-		double nota2 = CalculadorNotaProgramacion.pedirNota();
+		double nota2 = CalculadorNotaProgramacion.pedirNota(sc);
 
 		Assert.assertEquals(6.0, nota1, 0.01);
 		Assert.assertEquals(3.0, nota2, 0.01);
@@ -96,7 +97,7 @@ public class CalculadorNotaProgramacionTest {
 		Assert.assertEquals(4.5, media, 0.01);
 
 		provideInput("Apto");
-		double notaFinal = CalculadorNotaProgramacion.notaFinal(media);
+		double notaFinal = CalculadorNotaProgramacion.notaFinal(media,sc);
 
 		Assert.assertEquals(5.0, notaFinal, 0.01);
 	}
@@ -105,6 +106,7 @@ public class CalculadorNotaProgramacionTest {
 	public void mainTest() throws Exception {
 		provideInput("6\n3\napto\n");
 		CalculadorNotaProgramacion.main();
+		
 
 	}
 
